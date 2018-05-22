@@ -1,0 +1,114 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using TestForm.Properties;
+
+namespace TestForm.DAL.Repositories
+{
+    public class CategoryRepository : CategoryEntity
+    {
+
+        public int LoadCategory(int id)
+        {
+
+            using (var connection = new SqlConnection(DataManager.Active.ConnectionString))
+            {
+                var category = new SqlCommand("SELECT * From Category Where Id = @id", connection);
+                category.Parameters.AddWithValue("@id", id);
+                category.Connection.Open();
+                SqlDataReader reader = category.ExecuteReader();
+                while (reader.Read())
+                {
+                    ParentId = Convert.ToInt32(reader["ParentId"].ToString());
+                    Name = reader["Name"].ToString();
+                }
+            }
+            return id;
+
+        }
+
+        public CategoryRepository Get(int id)
+        {
+            using (var connection = new SqlConnection(DataManager.Active.ConnectionString))
+            {
+                var category = new CategoryRepository();
+                var command = new SqlCommand("SELECT * From Category Where Id = @id", connection);
+                command.Parameters.AddWithValue("@id", id);
+                command.Connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                category.ParentId = Convert.ToInt32(reader["ParentId"].ToString());
+                category.Name = reader["Name"].ToString();
+
+                return category;
+            }
+        }
+
+        public void EditCategoryInDb(int id, int parentId, string name)
+        {
+
+            using (var connection = new SqlConnection(DataManager.Active.ConnectionString))
+            {
+                var command = new SqlCommand("UPDATE category SET Name = @name, ParentId = @ParentId WHERE Id = @id", connection);
+
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@ParentId", parentId);
+                command.Parameters.AddWithValue("@name", name);
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+        }
+
+        public void AddCategoryInDb(int parentId, string name)
+        {
+
+            using (var connection = new SqlConnection(DataManager.Active.ConnectionString))
+            {
+
+                var command = new SqlCommand("INSERT INTO Category (ParentId, Name) VALUES (@parentId, @name)", connection);
+
+                command.Parameters.AddWithValue("@ParentId", parentId);
+                command.Parameters.AddWithValue("@name", name);
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteCategoryInDb(int id)
+        {
+
+            using (var connection = new SqlConnection(DataManager.Active.ConnectionString))
+            {
+
+                var command = new SqlCommand("DELETE FROM Category WHERE Id = @id", connection);
+
+                command.Parameters.AddWithValue("@id", id);
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public List<CategoryRepository> FillCategoryList(List<CategoryRepository> categories)
+        {
+            using (var connection = new SqlConnection(DataManager.Active.ConnectionString))
+            {
+                var category = new SqlCommand("SELECT * From Category", connection);
+                category.Connection.Open();
+                SqlDataReader reader = category.ExecuteReader();
+                while (reader.Read())
+                {
+                    categories.Add(new CategoryRepository
+                    {
+                        Id = (int)reader["Id"],
+                        ParentId = (int)reader["ParentId"],
+                        Name = (string)reader["Name"],
+                    });
+                }
+            }
+            return categories;
+        }
+
+    } 
+}

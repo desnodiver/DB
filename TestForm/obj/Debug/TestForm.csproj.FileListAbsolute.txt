@@ -1,0 +1,12 @@
+C:\Users\Max\source\repos\TestForm\TestForm\bin\Debug\TestForm.exe.config
+C:\Users\Max\source\repos\TestForm\TestForm\bin\Debug\TestForm.exe
+C:\Users\Max\source\repos\TestForm\TestForm\bin\Debug\TestForm.pdb
+C:\Users\Max\source\repos\TestForm\TestForm\obj\Debug\TestForm.FmMain.resources
+C:\Users\Max\source\repos\TestForm\TestForm\obj\Debug\TestForm.Properties.Resources.resources
+C:\Users\Max\source\repos\TestForm\TestForm\obj\Debug\TestForm.csproj.GenerateResource.cache
+C:\Users\Max\source\repos\TestForm\TestForm\obj\Debug\TestForm.csproj.CoreCompileInputs.cache
+C:\Users\Max\source\repos\TestForm\TestForm\obj\Debug\TestForm.exe
+C:\Users\Max\source\repos\TestForm\TestForm\obj\Debug\TestForm.pdb
+C:\Users\Max\source\repos\TestForm\TestForm\obj\Debug\TestForm.csprojResolveAssemblyReference.cache
+C:\Users\Max\source\repos\TestForm\TestForm\obj\Debug\TestForm.UI.FmCategory.resources
+C:\Users\Max\source\repos\TestForm\TestForm\obj\Debug\TestForm.UI.FmProduct.resources
